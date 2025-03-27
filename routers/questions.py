@@ -46,7 +46,8 @@ def questions_list() -> None | tuple[Response, int] | Response:
 
         return jsonify(
             QuestionResponse(id=new_question.id,
-                             text=new_question.text
+                             text=new_question.text,
+                             category_id=new_question.category_id
                              ).model_dump()
         ), 201  # CREATED
 
@@ -66,10 +67,10 @@ def retrieve_question(id: int):
                 }
             ), 404
         return jsonify(
-            {
-                "id": question.id,
-                "text": question.text
-            }
+            QuestionResponse(id=question.id,
+                             text=question.text,
+                             category_id=question.category_id
+                             ).model_dump()
         ), 200
 
     if request.method == "PUT":
@@ -92,10 +93,10 @@ def retrieve_question(id: int):
         updated_question = update_question(question, data)
 
         return jsonify(
-            {
-                "id": updated_question.id,
-                "text": updated_question.text
-            }
+            QuestionResponse(id=updated_question.id,
+                             text=updated_question.text,
+                             category_id=updated_question.category_id
+                             ).model_dump()
         ), 200
 
     if request.method == "DELETE":
