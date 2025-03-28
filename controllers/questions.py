@@ -1,3 +1,4 @@
+from controllers.categories import get_category_by_id
 from models.questions import Question
 from models import db
 from schemas.quastions import QuestionCreate
@@ -20,6 +21,7 @@ def get_all_questions() -> list[dict[str, int | str]]:
 def create_new_question(raw_data: dict[str, str]) -> Question:
     validated_obj = QuestionCreate.model_validate(raw_data)
 
+    get_category_by_id(validated_obj.category_id)
     new_obj = Question(text=validated_obj.text,
                        category_id=validated_obj.category_id
                        )
