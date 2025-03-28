@@ -4,6 +4,8 @@ flask --app padv_9/app_runner db --help
 flask db init
 flask db migrate -m "erste"
 
+file_template = %%(year)d_%%(month).2d_%%(day).2d_%%(hour).2d%%(minute).2d-%%(rev)s_%%(slug)s
+
 GET (получить объект \ список объектов)
 POST (создать объект)
 PUT \ PATCH (обновить конкретный объект или целиком, или кнкретное поле(поля))
